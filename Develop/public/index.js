@@ -46,13 +46,13 @@ function populateChart() {
   let sum = 0;
 
   // create date labels for chart
-  let labels = reversed.map(t => {
+  let labels = reversed.map((t) => {
     let date = new Date(t.date);
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   });
 
   // create incremental values for chart
-  let data = reversed.map(t => {
+  let data = reversed.map((t) => {
     sum += parseInt(t.value);
     return sum;
   });
@@ -124,7 +124,7 @@ function sendTransaction(isAdding) {
   .then(response => {    
     return response.json();
   })
-  .then(data => {
+  .then((data) => {
     if (data.errors) {
       errorEl.textContent = "Missing Information";
     }
@@ -143,11 +143,13 @@ function sendTransaction(isAdding) {
     amountEl.value = "";
   });
 }
-
-document.querySelector("#add-btn").onclick = function() {
+//changed these to match activity 17:26 if problems revert back to HS files in repo. 
+document.querySelector("#add-btn").addEventListener("click", function(event) {
+  event.preventDefault();
   sendTransaction(true);
-};
+});
 
-document.querySelector("#sub-btn").onclick = function() {
+document.querySelector("#sub-btn").addEventListener("click", function(event) {
+  event.preventDefault();
   sendTransaction(false);
-};
+});
