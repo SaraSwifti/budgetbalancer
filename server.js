@@ -2,15 +2,16 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-  }
-);
+//this is what the mongo atlas directions gave me however I THink that proper deploy info is on line 27. 
+// mongoose.connect(
+//   process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false
+//   }
+// );
 const PORT = 3000;
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
+mongoose.connect(process.env.MONGODB_URI ||"mongodb://localhost/budget", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
