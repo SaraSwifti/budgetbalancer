@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
-//this is what the mongo atlas directions gave me however I THink that proper deploy info is on line 27. 
+//this is what the mongo atlas directions gave me however I THink that proper deploy info is on line 27. g
 // mongoose.connect(
 //   process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
 //   {
@@ -12,7 +12,7 @@ const compression = require("compression");
 //     useFindAndModify: false
 //   }
 // );
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
