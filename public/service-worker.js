@@ -10,23 +10,24 @@ const FILES_TO_CACHE = [
 
 ];
 
-const PRECACHE = 'precache-v1';
-const RUNTIME = 'runtime';
-const DATA_CACHE = 'data-cache-v1';
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = 'data-cache-v1';
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
-            .open(PRECACHE)
-            .then((cache) => cache.addAll(FILES_TO_CACHE))
-            .then(self.skipWaiting())
-    );
+            .open(CACHE_NAME)
+            .then((cache) =>{
+                console.log("files have been cached");
+                return cache.addAll(FILES_TO_CACHE);
+            })
+            
+    ).then(self.skipWaiting());
 });
 
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', (event) => {
-    const currentCaches = [PRECACHE, RUNTIME];
     event.waitUntil(
         caches
             .keys()
@@ -43,12 +44,14 @@ self.addEventListener('activate', (event) => {
             .then(() => self.clients.claim())
     );
 });
+//fetch
+
 self.addEventListener('fetch', (event) => {
     if (event.request.url.startsWith(self.location.origin)) {
         event.respondWith(
-            caches.match(event.request).then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
+            caches.match(DATA_CACHE_NAME).then((cached) => {
+                if (cached) {
+                    return cached;
                 }
 
                 return caches.open(RUNTIME).then((cache) => {
@@ -63,13 +66,8 @@ self.addEventListener('fetch', (event) => {
     }
 });
 //   //adding even respond not sure about this one
-event.respondWith(
-    fetch(event.request).catch(() => {
-        return caches.match(event.request).then((response) => {
-            if (response) { return response }
-            else if (event.request.headers("accept").includes("text/html")) {
-                return caches.match("/")
-            }
-        })
+evt.respondWith(
+    caches.match(evt.request).then(function(response) {
+      return response || fetch(evt.request);
     })
-)
+  );
