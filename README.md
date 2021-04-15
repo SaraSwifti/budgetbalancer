@@ -1,12 +1,13 @@
 # budgetbalancer
+
+
+
+
+* Video of deployment:[link] (https://drive.google.com/file/d/1kWjn1xtATYyQcgy9dairu1DTYwOXtW-R/view)
+* Heroku Link:[heroku deploy](https://frozen-eyrie-83934.herokuapp.com/)
+
+
 # Unit 18 PWA Homework: Online/Offline Budget Trackers
-
-[heroku deploy](https://frozen-eyrie-83934.herokuapp.com/)
-[video of deployment] (https://drive.google.com/file/d/1kWjn1xtATYyQcgy9dairu1DTYwOXtW-R/view)
-
-
- Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
-
 The user will be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they should populate the total when brought back online.
 
 Offline Functionality:
@@ -35,4 +36,4 @@ WHEN the user inputs a withdrawal or deposit
 THEN that will be shown on the page, and added to their transaction history when their connection is back online.
 
 - - -
-
+* My Email Address: [sara.swifti@gmail.com](sara.swifti@gmail.com)
